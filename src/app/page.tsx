@@ -11,7 +11,8 @@ const Page = async (
 ) => {
   const searchParams = await props.searchParams;
   const page = searchParams.page ? parseInt(searchParams.page as string) : 1;
-  const result = await wisp.getPosts({ limit: 6, page });
+  const result = await wisp.getPosts({ limit: 16, page });
+  const post = result.posts
   return (
     <div className="container mx-auto px-5 mb-10">
       <Header />

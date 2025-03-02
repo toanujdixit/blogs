@@ -9,28 +9,30 @@ import { FunctionComponent } from "react";
 export const BlogPostPreview: FunctionComponent<{
   post: GetPostsResult["posts"][0];
 }> = ({ post }) => {
+
+  const truncateTitle = (title:string, wordLimit =20) => {
+    const words = title.split(" ");
+    return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : title;
+  };
+
   return (
+    <div className="max-w-sm rounded-sm overflow-hidden shadow-lg bg-white hover:shadow-sm transition-shadow duration-300">
     <div className="break-words">
       <Link href={`/blog/${post.slug}`}>
         <div className="aspect-[16/9] relative">
           <Image
             alt={post.title}
-            className="object-cover"
+            className="w-full h-48 object-cover"
             src={post.image || "/images/placeholder.webp"}
             fill
           />
         </div>
       </Link>
-      <div className="grid grid-cols-1 gap-3 md:col-span-2 mt-4">
-        <h2 className="font-sans font-semibold tracking-tighter text-primary text-2xl md:text-3xl">
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+      <div className="p-4">
+        <h2 className="text-xl font-semibold text-gray-800">
+          <Link href={`/blog/${post.slug}`}>{truncateTitle(post.description)}</Link>
         </h2>
-        <div className="prose lg:prose-lg italic tracking-tighter text-muted-foreground">
-          {formatDate(post.publishedAt || post.updatedAt, "dd MMMM yyyy")}
-        </div>
-        <div className="prose lg:prose-lg leading-relaxed md:text-lg line-clamp-4 text-muted-foreground">
-          {post.description}
-        </div>
+        
         <div className="text-sm text-muted-foreground">
           {post.tags.map((tag) => (
             <div key={tag.id} className="mr-2 inline-block">
@@ -40,6 +42,7 @@ export const BlogPostPreview: FunctionComponent<{
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
@@ -47,10 +50,11 @@ export const BlogPostsPreview: FunctionComponent<{
   posts: GetPostsResult["posts"];
   className?: string;
 }> = ({ posts, className }) => {
+  console.log("Posts", posts);
   return (
     <div
       className={cn(
-        "grid grid-cols-1 gap-16 lg:gap-28 md:grid-cols-2 md:my-16 my-8",
+        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 lg:gap-2 md:grid-cols-2 md:my-10 my-3",
         className
       )}
     >
