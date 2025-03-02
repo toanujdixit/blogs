@@ -10,9 +10,9 @@ export const BlogPostPreview: FunctionComponent<{
   post: GetPostsResult["posts"][0];
 }> = ({ post }) => {
 
-  const truncateTitle = (title:string, wordLimit =20) => {
-    const words = title.split(" ");
-    return words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : title;
+  const truncateTitle = (title:string | undefined | null, wordLimit =20) => {
+    const words = title && title.split(" ");
+    return words && words.length > wordLimit ? words.slice(0, wordLimit).join(" ") + "..." : title;
   };
 
   return (
