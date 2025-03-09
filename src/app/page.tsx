@@ -14,7 +14,7 @@ const Page = async (
   const result = await wisp.getPosts({ limit: 16, page });
   const post = result.posts
   return (
-    <div className="container mx-auto px-5 mb-10">
+    <div className="container mx-auto px-5 mb-10 py-5">
       <Header />
       <BlogPostsPreview posts={result.posts} />
       <BlogPostsPagination pagination={result.pagination} />
