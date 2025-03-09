@@ -16,13 +16,13 @@ export const BlogPostPreview: FunctionComponent<{
   };
 
   return (
-    <div className="max-w-sm rounded-sm overflow-hidden shadow-lg bg-white hover:shadow-sm transition-shadow duration-300">
+    <div className="max-w-sm overflow-hidden shadow-lg bg-white hover:shadow-sm transition-shadow duration-300">
     <div className="break-words">
       <Link href={`/blog/${post.slug}`}>
         <div className="aspect-[16/9] relative">
           <Image
             alt={post.title}
-            className="w-full h-48 object-cover"
+            className="w-full h-48 object-cover rounded-sm"
             src={post.image || "/images/placeholder.webp"}
             fill
           />
@@ -54,7 +54,7 @@ export const BlogPostsPreview: FunctionComponent<{
   return (
     <div
       className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-2 lg:gap-2 md:grid-cols-2 md:my-10 my-3",
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl md:my-10 my-3",
         className
       )}
     >
